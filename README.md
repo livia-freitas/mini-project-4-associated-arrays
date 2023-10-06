@@ -6,4 +6,4 @@ Developed for Sam Rebelsky's CSC-207 Fall 2023 class.
 
 **Acknowledgements**
 
-[Using Java Pairs]([url](https://www.baeldung.com/java-pairs))
+[Using Java Pairs]([url](https://www.baeldung.com/java-pairs)https://www.baeldung.com/java-pairs)
