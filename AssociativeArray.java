@@ -29,7 +29,7 @@ public class AssociativeArray<K, V> {
   /**
    * The array of key/value pairs.
    */
-  KVPair<Object, Object> pairs[];
+  KVPair<K, V> pairs[];
 
   // +--------------+------------------------------------------------
   // | Constructors |
@@ -41,7 +41,7 @@ public class AssociativeArray<K, V> {
   @SuppressWarnings({ "unchecked" })
   public AssociativeArray() {
     // Creating new arrays is sometimes a PITN.
-    this.pairs = (KVPair<Object, Object>[]) newInstance((new KVPair<Object, Object>()).getClass(),
+    this.pairs = (KVPair<K, V>[]) newInstance((new KVPair<K, V>()).getClass(),
         DEFAULT_CAPACITY);
     this.size = 0;
   } // AssociativeArray()
@@ -81,7 +81,7 @@ public class AssociativeArray<K, V> {
    * @param _key
    * @param _value
    */
-  public void set(Object _key, Object _value) { 
+  public void set(K _key, V _value) { 
     int i = this.search(_key);
     if(i == -1) { // if the array is full and there is no match, add K/V pair to the last slot of the array
       this.pairs[this.size].key = _key;
@@ -99,7 +99,7 @@ public class AssociativeArray<K, V> {
    * @return
    * @throws Exception
    */
-  public Object get(Object _key) throws Exception {
+  public V get(K _key) throws Exception {
     for (int i = 0; i < this.pairs.length; i++) {
       if (this.pairs[i].key.equals(_key)) {
         return this.pairs[i].value;
@@ -113,7 +113,7 @@ public class AssociativeArray<K, V> {
    * @param _key
    * @return
    */
-  public boolean hasKey(Object _key) {
+  public boolean hasKey(K _key) {
     for (int i = 0; i < this.pairs.length; i++) {
       if (this.pairs[i].key.equals(_key)) {
         return true;
@@ -143,7 +143,8 @@ public class AssociativeArray<K, V> {
    * in the associative array, does nothing.
    */
   public void remove(K key) {
-    // STUB
+    int i = this.search(key);
+    this.pairs[i] = null;
   } // remove(K)
 
     // +-----------------+---------------------------------------------
@@ -163,7 +164,7 @@ public class AssociativeArray<K, V> {
    * @param _key
    * @return
    */
-  public int search(Object _key){ // simplify the boolean checks and loops
+  public int search(K _key){ // simplify the boolean checks and loops
     int first_null = -1;
     int match = -1; 
 

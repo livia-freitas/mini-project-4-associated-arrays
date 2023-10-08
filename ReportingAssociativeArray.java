@@ -1,5 +1,6 @@
-import java.io.PrintWriter;
 package miniproject4;
+import java.io.PrintWriter;
+
 
 /**
  * An extension of the AssociativeArray class that reports each
@@ -44,6 +45,7 @@ public class ReportingAssociativeArray<K,V> extends AssociativeArray<K,V> {
   /**
    * Set a value.
    */
+
   public void set(K key, V value) {
     pen.println(name + ".set(" + key + ", " + value + ")");
     super.set(key, value);
@@ -52,11 +54,9 @@ public class ReportingAssociativeArray<K,V> extends AssociativeArray<K,V> {
 
   /**
    * Get the value associated with key.
-   *
-   * @throws KeyNotFoundException
-   *   when the key does not appear in the associative array.
+   * @throws Exception
    */
-  public V get(K key) throws KeyNotFoundException {
+  public V get(K key) throws Exception {
     pen.print(name + ".get(" + key + ") = ");
     pen.flush();
     try {
@@ -72,7 +72,7 @@ public class ReportingAssociativeArray<K,V> extends AssociativeArray<K,V> {
   /**
    * Determine if key appears in the associative array.
    */
-  public boolean hasKey(K key) {
+  public boolean hasKeyRA(K key) {
     pen.print(name + ".hasKey(" + key + ") = ");
     pen.flush();
     boolean result = super.hasKey(key);
