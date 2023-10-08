@@ -6,6 +6,8 @@ Developed for Sam Rebelsky's CSC-207 Fall 2023 class.
 
 **Acknowledgements**
 
-Using Java Pairs : https://www.baeldung.com/java-pairs
+Using Java Pairs: https://www.baeldung.com/java-pairs
 
-Arrays documentation (binarySearch) : https://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#binarySearch-java.lang.Object:A-java.lang.Object-
+Arrays documentation: https://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#binarySearch-java.lang.Object:A-java.lang.Object-
+
+How to Create an Exception in Java: https://www.webucator.com/article/how-to-create-an-exception-class-in-java/
