@@ -50,37 +50,29 @@ public class AssociativeArray<K, V> {
   // | Standard Methods |
   // +------------------+
 
- 
-
   /**
-   * Keeps track of the address of the first null and return either (a) the address of the matching element, if found,
-   * or (b) the address of the first null, if not found.
-   * @param _key
-   * @return
+   * Create a copy of this AssociativeArray.
    */
-  public int search(Object _key){ // simplify the boolean checks and loops
-    int first_null = -1;
-    int match = -1; 
+  public AssociativeArray<K, V> clone() {
+    return null; // STUB
+  } // clone()
 
+    /**
+   * Return a string of the form "{ key0: value0, key1: value1, ... keyn: valuen }"
+   */
+  public String toString(){
+    String message = "";
     for (int i = 0; i < this.pairs.length; i++) {
-      if (this.pairs[i].key == null) { 
-        first_null = i;
-        break;
-      } // if
+     message.concat("key" + i +": " + this.pairs[i].value + ", ");
+     message.concat("value" + i +": " + this.pairs[i].key + ", ");
     } // for
+    return message;
+  }
+ 
+    // +----------------+----------------------------------------------
+  // | Public Methods |
+  // +----------------+
 
-    for (int i = 0; i < this.pairs.length; i++) {
-      if (this.pairs[i].key.equals(_key)) { 
-        match = i;
-        break;
-      } // if
-    } // for
-
-    if(match != -1){
-      return match;
-    }
-    return first_null; // is match if there's a match, first_null if not
-  }//search()
 
   /**
    * Set the value associated with a given key. If there is already another value associated with
@@ -144,17 +136,6 @@ public class AssociativeArray<K, V> {
     return count;
   }//size
 
-  /**
-   * Return a string of the form "{ key0: value0, key1: value1, ... keyn: valuen }"
-   */
-  public String toString(){
-    String message = "";
-    for (int i = 0; i < this.pairs.length; i++) {
-     message.concat("key" + i +": " + this.pairs[i].value + ", ");
-     message.concat("value" + i +": " + this.pairs[i].key + ", ");
-    } // for
-    return message;
-  }
 
     /**
    * Remove the key/value pair associated with a key. Future calls
@@ -164,5 +145,47 @@ public class AssociativeArray<K, V> {
   public void remove(K key) {
     // STUB
   } // remove(K)
+
+    // +-----------------+---------------------------------------------
+  // | Private Methods |
+  // +-----------------+
+
+  /**
+   * Expand the underlying array.
+   */
+  public void expand() {
+    this.pairs = java.util.Arrays.copyOf(this.pairs, this.pairs.length * 2);
+  } // expand()
+
+  /**
+   * Keeps track of the address of the first null and return either (a) the address of the matching element, if found,
+   * or (b) the address of the first null, if not found.
+   * @param _key
+   * @return
+   */
+  public int search(Object _key){ // simplify the boolean checks and loops
+    int first_null = -1;
+    int match = -1; 
+
+    for (int i = 0; i < this.pairs.length; i++) {
+      if (this.pairs[i].key == null) { 
+        first_null = i;
+        break;
+      } // if
+    } // for
+
+    for (int i = 0; i < this.pairs.length; i++) {
+      if (this.pairs[i].key.equals(_key)) { 
+        match = i;
+        break;
+      } // if
+    } // for
+
+    if(match != -1){
+      return match;
+    }
+    return first_null; // is match if there's a match, first_null if not
+  }//search()
+
 
 }// AssociatedArray
