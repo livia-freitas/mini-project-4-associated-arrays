@@ -1,7 +1,7 @@
 package miniproject4;
 import java.lang.Object;
 import static java.lang.reflect.Array.newInstance;
-
+import miniproject4.KVPair;
 
 /**
  * Author: Livia Stein Freitas Implements associated arrays by using the basic Java arrays to create
@@ -60,20 +60,18 @@ public class AssociativeArray<K, V> {
     /**
    * Return a string of the form "{ key0: value0, key1: value1, ... keyn: valuen }"
    */
+  
   public String toString(){
     String message = "";
-    for (int i = 0; i < this.pairs.length; i++) {
-     message.concat("key" + i +": " + this.pairs[i].value + ", ");
-     message.concat("value" + i +": " + this.pairs[i].key + ", ");
-    } // for
+      for (int i = 0; i < this.pairs.length; i++) {
+        if(this.pairs[i] != null){
+          message.concat("key" + i +": " + this.pairs[i].value + ", ");
+          message.concat("value" + i +": " + this.pairs[i].key + ", ");
+        }//if
+      }//for
     return message;
-  }
- 
-    // +----------------+----------------------------------------------
-  // | Public Methods |
-  // +----------------+
-
-
+  }//toString
+  
   /**
    * Set the value associated with a given key. If there is already another value associated with
    * the given key, this new value replaces that value.
@@ -87,8 +85,8 @@ public class AssociativeArray<K, V> {
       this.pairs[this.size].key = _key;
       this.pairs[this.size].value = _value;
     } else { //otherwise, set it to the first null/first match
-      this.pairs[i].key = _key;
-      this.pairs[i].value = _value;
+      KVPair newPair = new KVPair<K, V>(_key, _value);
+      this.pairs[i] = newPair;
     }
   }// set()
 
@@ -129,7 +127,7 @@ public class AssociativeArray<K, V> {
   public int size() {
     int count = 0;
     for (int i = 0; i < this.pairs.length; i++) {
-      if (this.pairs[i].value != null) { // I don't know whether to check the key or the value
+      if (this.pairs[i] == null) { // I don't know whether to check the key or the value
         count ++;
       } // if
     } // for
@@ -169,17 +167,13 @@ public class AssociativeArray<K, V> {
     int match = -1; 
 
     for (int i = 0; i < this.pairs.length; i++) {
-      if (this.pairs[i].key == null) { 
+      if (this.pairs[i] == null) { 
         first_null = i;
         break;
-      } // if
-    } // for
-
-    for (int i = 0; i < this.pairs.length; i++) {
-      if (this.pairs[i].key.equals(_key)) { 
+      } else if (this.pairs[i].key.equals(_key)) { 
         match = i;
         break;
-      } // if
+      } // elseif
     } // for
 
     if(match != -1){
