@@ -1,7 +1,7 @@
-package miniproject4;
+package structures;
 import java.lang.Object;
+import structures.KVPair;
 import static java.lang.reflect.Array.newInstance;
-import miniproject4.KVPair;
 
 /**
  * Author: Livia Stein Freitas Implements associated arrays by using the basic Java arrays to create
@@ -63,15 +63,17 @@ public class AssociativeArray<K, V> {
   
   public String toString(){
     String message = "";
-      for (int i = 0; i < this.pairs.length; i++) {
+    int i;
+    int length_tracker = 0;
+      for (i = 0; i < this.pairs.length; i++) {
         if(this.pairs[i] != null){
-          message.concat("key" + i +": " + this.pairs[i].value + ", ");
-          message.concat("value" + i +": " + this.pairs[i].key + ", ");
+          message = message.concat(" " + this.pairs[i].key +": " + this.pairs[i].value + ",");
+          length_tracker = i;
         }//if
       }//for
-    return message;
+    return message.substring(0, message.length() - 1); // it needs to be the last non-null value...
   }//toString
-  
+
   /**
    * Set the value associated with a given key. If there is already another value associated with
    * the given key, this new value replaces that value.
@@ -82,8 +84,8 @@ public class AssociativeArray<K, V> {
   public void set(K _key, V _value) { 
     int i = this.search(_key);
     if(i == -1) { // if the array is full and there is no match, add K/V pair to the last slot of the array
-      this.pairs[this.size].key = _key;
-      this.pairs[this.size].value = _value;
+      KVPair newPair = new KVPair<K, V>(_key, _value);
+      this.pairs[this.size] = newPair;
     } else { //otherwise, set it to the first null/first match
       KVPair newPair = new KVPair<K, V>(_key, _value);
       this.pairs[i] = newPair;
@@ -101,7 +103,7 @@ public class AssociativeArray<K, V> {
     for (int i = 0; i < this.pairs.length; i++) {
       if (this.pairs[i].key.equals(_key)) {
         return this.pairs[i].value;
-      } // if
+      } 
     } // for
     throw new KeyNotFoundException("There is no such key in this array.");
   }// get()
@@ -113,9 +115,11 @@ public class AssociativeArray<K, V> {
    */
   public boolean hasKey(K _key) {
     for (int i = 0; i < this.pairs.length; i++) {
-      if (this.pairs[i].key.equals(_key)) {
+      if(this.pairs[i] == null) {
+        continue;
+      } else if (this.pairs[i].key.equals(_key)) {
         return true;
-      } // if
+      } // else if
     } // for
     return false;
   }
@@ -127,7 +131,7 @@ public class AssociativeArray<K, V> {
   public int size() {
     int count = 0;
     for (int i = 0; i < this.pairs.length; i++) {
-      if (this.pairs[i] == null) { // I don't know whether to check the key or the value
+      if (this.pairs[i] != null) { // I don't know whether to check the key or the value
         count ++;
       } // if
     } // for
@@ -165,16 +169,24 @@ public class AssociativeArray<K, V> {
   public int search(K _key){ // simplify the boolean checks and loops
     int first_null = -1;
     int match = -1; 
-
+    
+    //find the first null
     for (int i = 0; i < this.pairs.length; i++) {
       if (this.pairs[i] == null) { 
         first_null = i;
         break;
+      } 
+    }
+    for (int i = 0; i < this.pairs.length; i++) {
+      if(this.pairs[i] == null){
+        continue;
       } else if (this.pairs[i].key.equals(_key)) { 
-        match = i;
+      match = i;
         break;
       } // elseif
     } // for
+
+    //two issues: it's only going until the first null? I think. also 
 
     if(match != -1){
       return match;
