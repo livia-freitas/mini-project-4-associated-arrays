@@ -54,7 +54,13 @@ public class AssociativeArray<K, V> {
    * Create a copy of this AssociativeArray.
    */
   public AssociativeArray<K, V> clone() {
-    return null; // STUB
+    AssociativeArray<K,V> arrayCopy = new AssociativeArray<K,V>();
+    for (int i = 0; i < this.pairs.length; i++){
+      if (this.pairs[i] != null){
+        arrayCopy.pairs[i] = this.pairs[i];
+      }
+    }
+    return arrayCopy; // STUB
   } // clone()
 
     /**
@@ -62,16 +68,15 @@ public class AssociativeArray<K, V> {
    */
   
   public String toString(){
-    String message = "";
+    String message = "{";
     int i;
-    int length_tracker = 0;
       for (i = 0; i < this.pairs.length; i++) {
         if(this.pairs[i] != null){
           message = message.concat(" " + this.pairs[i].key +": " + this.pairs[i].value + ",");
-          length_tracker = i;
         }//if
       }//for
-    return message.substring(0, message.length() - 1); // it needs to be the last non-null value...
+      message = message.concat(" }");
+    return message; 
   }//toString
 
   /**
@@ -82,7 +87,7 @@ public class AssociativeArray<K, V> {
    * @param _value
    */
   public void set(K _key, V _value) { 
-    int i = this.search(_key);
+    int i = this.find(_key);
     if(i == -1) { // if the array is full and there is no match, add K/V pair to the last slot of the array
       KVPair newPair = new KVPair<K, V>(_key, _value);
       this.pairs[this.size] = newPair;
@@ -101,7 +106,9 @@ public class AssociativeArray<K, V> {
    */
   public V get(K _key) throws Exception {
     for (int i = 0; i < this.pairs.length; i++) {
-      if (this.pairs[i].key.equals(_key)) {
+      if(this.pairs[i] == null){
+        continue;
+      } if (this.pairs[i].key.equals(_key)) {
         return this.pairs[i].value;
       } 
     } // for
@@ -145,7 +152,7 @@ public class AssociativeArray<K, V> {
    * in the associative array, does nothing.
    */
   public void remove(K key) {
-    int i = this.search(key);
+    int i = this.find(key);
     this.pairs[i] = null;
   } // remove(K)
 
@@ -166,7 +173,7 @@ public class AssociativeArray<K, V> {
    * @param _key
    * @return
    */
-  public int search(K _key){ // simplify the boolean checks and loops
+  public int find(K _key){ // simplify the boolean checks and loops
     int first_null = -1;
     int match = -1; 
     
@@ -192,7 +199,7 @@ public class AssociativeArray<K, V> {
       return match;
     }
     return first_null; // is match if there's a match, first_null if not
-  }//search()
+  }//find()
 
 
 }// AssociatedArray
