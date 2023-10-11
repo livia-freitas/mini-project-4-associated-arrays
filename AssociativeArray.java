@@ -70,11 +70,16 @@ public class AssociativeArray<K, V> {
   public String toString(){
     String message = "{";
     int i;
+    if(this.size() == 0){
+      message = message.concat("}");
+      return message;
+    }
       for (i = 0; i < this.pairs.length; i++) {
         if(this.pairs[i] != null){
           message = message.concat(" " + this.pairs[i].key +": " + this.pairs[i].value + ",");
         }//if
       }//for
+      message = message.substring(0, message.length() - 1);
       message = message.concat(" }");
     return message; 
   }//toString
@@ -90,7 +95,9 @@ public class AssociativeArray<K, V> {
     int i = this.find(_key);
     if(i == -1) { // if the array is full and there is no match, add K/V pair to the last slot of the array
       KVPair newPair = new KVPair<K, V>(_key, _value);
-      this.pairs[this.size] = newPair;
+      this.expand();
+      i = this.find(_key);
+      this.pairs[i] = newPair;
     } else { //otherwise, set it to the first null/first match
       KVPair newPair = new KVPair<K, V>(_key, _value);
       this.pairs[i] = newPair;
@@ -193,12 +200,12 @@ public class AssociativeArray<K, V> {
       } // elseif
     } // for
 
-    //two issues: it's only going until the first null? I think. also 
 
-    if(match != -1){
+    if(match != -1){ //if there is a match, return match
       return match;
     }
-    return first_null; // is match if there's a match, first_null if not
+    return first_null; // if there's no match, return the first null
+                       // if there's no match and no empty slots, return -1
   }//find()
 
 
