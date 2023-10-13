@@ -1,4 +1,4 @@
-package miniproject4;
+package structures;
 import java.io.PrintWriter;
 import java.math.BigInteger;
 
@@ -25,6 +25,8 @@ public class AssociativeArrayExperiments {
     divider(pen);
     experimentBigIntToBigInt(pen);
     divider(pen);
+
+  
   } // main(String[])
 
   // +-------------+-------------------------------------------------
@@ -93,6 +95,16 @@ public class AssociativeArrayExperiments {
     for (int i = 0; i < 11; i++) {
       try { b2b.get(BigInteger.valueOf(i)); } catch (Exception e) { }
     } // for
+
+    AssociativeArray<String,Integer> si = new AssociativeArray<String,Integer>();
+  si.set("A",1);
+  si.set("B",2);
+  si.set("C",3);
+
+  String result = si.toString();
+  pen.println("result: " + result);
+  AssociativeArray<String, String> arr = new AssociativeArray<String, String>();
+  arr.remove("A");
   } // experimentBigIntToBigInt
 
   // +---------+-----------------------------------------------------
@@ -108,6 +120,6 @@ public class AssociativeArrayExperiments {
     pen.println();
   } // divider(PrintWriter)
 
-
+  
 
 } // AssociativeArrayExperiments

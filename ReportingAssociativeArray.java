@@ -1,4 +1,4 @@
-package miniproject4;
+package structures;
 import java.io.PrintWriter;
 
 
@@ -56,7 +56,7 @@ public class ReportingAssociativeArray<K,V> extends AssociativeArray<K,V> {
    * Get the value associated with key.
    * @throws Exception
    */
-  public V get(K key) throws Exception {
+  public V get(K key) throws KeyNotFoundException {
     pen.print(name + ".get(" + key + ") = ");
     pen.flush();
     try {

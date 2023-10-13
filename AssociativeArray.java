@@ -60,7 +60,7 @@ public class AssociativeArray<K, V> {
         arrayCopy.pairs[i] = this.pairs[i];
       }
     }
-    return arrayCopy; // STUB
+    return arrayCopy;
   } // clone()
 
     /**
@@ -111,7 +111,7 @@ public class AssociativeArray<K, V> {
    * @return
    * @throws Exception
    */
-  public V get(K _key) throws Exception {
+  public V get(K _key) throws KeyNotFoundException {
     for (int i = 0; i < this.pairs.length; i++) {
       if(this.pairs[i] == null){
         continue;
