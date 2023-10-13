@@ -21,4 +21,6 @@ NullPointerException: https://docs.oracle.com/javase/8/docs/api/java/lang/NullPo
 
 Method Overriding in Java: https://www.geeksforgeeks.org/overriding-in-java/
 
+Sam Rebelsky helped me use Git from the command line.
+
 
